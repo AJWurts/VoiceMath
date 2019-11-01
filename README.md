@@ -1,4 +1,4 @@
-# Voice Math
+# [VoiceMath](https://ajwurts.github.io/VoiceMath)
 Have you ever wanted to answer simple math problems with only your voice?   
 Now you can! 
 

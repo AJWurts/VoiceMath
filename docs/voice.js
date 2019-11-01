@@ -2,6 +2,7 @@ let recognizer;
 let answer;
 let prev;
 let prev2;
+const OPERATORS = ['+', '-', '*'];
 
 const KEY = {
   'zero': 0,
@@ -28,7 +29,7 @@ function predictWord() {
       writeEq();
       document.querySelector('#info').textContent = `Nice Job`;
     }
-    else if (("" + answer).length == 2 &&  +(KEY[prev] + "" + KEY[scores[0].word]) === answer) {
+    else if (("" + answer).length == 2 && +(KEY[prev] + "" + KEY[scores[0].word]) === answer) {
       writeEq();
       document.querySelector('#info').textContent = `Nice Job`;
     } else if (+(KEY[prev2] + "" + KEY[prev] + "" + KEY[scores[0].word]) === answer) {
@@ -45,17 +46,36 @@ function predictWord() {
 
 }
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+function getRandomInt(min, max) {
+  return min + Math.floor(Math.random() * Math.floor(max));
 }
 
 function writeEq() {
-  let a = getRandomInt(12);
-  let b = getRandomInt(12);
+  let operator = OPERATORS[getRandomInt(0, OPERATORS.length)];
+  if (operator === '+') {
+    var a = getRandomInt(0, 80);
+    var b = getRandomInt(0, 80);
 
-  answer = a * b;
+    answer = a + b;
 
-  document.querySelector('#equation').textContent = `${a} * ${b} = (say individually)`;
+  } else if (operator === '-') {
+    var a = getRandomInt(0, 80);
+    var b = getRandomInt(0, a);
+
+    answer = a - b;
+
+  } else if (operator === '*') {
+    var a = getRandomInt(2, 12);
+    var b = getRandomInt(2, 12);
+  
+    answer = a * b;
+
+  
+  }
+
+
+  document.querySelector('#equation').textContent = `${a} ${operator} ${b} = (say individually)`;
+
 }
 
 async function app() {
